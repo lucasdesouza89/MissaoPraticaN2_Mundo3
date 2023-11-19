@@ -54,11 +54,10 @@ CREATE TABLE [Pessoa] (
 
 -- Inserindo dados na tabela Pessoa
 INSERT INTO [Pessoa] (nome, logradouro, cidade, estado, telefone, email)
-VALUES ('Wallace Felipe Tavares', 'Rua Chile', 'Rio de Janeiro', 'RJ', '11991876543', 'wfelipe@gmail.com'),
-       ('Felipe Wallace Tavares', 'Rua Chile', 'Rio de Janeiro', 'RJ', '12345678909', 'wfeli@gmail.com'),
-       ('Bingo Trêsbolas', 'Rua Ana Augusta', 'Rio de Janeiro', 'RJ', '11991098789', 'wfee@gmail.com'),
-       ('Padaria Norte', 'Rua México', 'Rio de Janeiro', 'RJ', '11909878654', 'lipe@gmail.com');
-
+VALUES ('Lucas Matos de Souza', 'Rua Chile', 'Rio de Janeiro', 'RJ', '11991876543', 'lucas_matos@outlook.com.br'),
+       ('FNatan Matos de Souza', 'Rua Chile', 'Rio de Janeiro', 'RJ', '12345678909', 'lucas_matos@outlook.com.br'),
+       ('Diana Oliveira de Souza', 'Rua Ana Augusta', 'Rio de Janeiro', 'RJ', '11991098789', 'lucas_matos@outlook.com.br'),
+       ('Padaria Norte', 'Rua MÃ©xico', 'Rio de Janeiro', 'RJ', '11909878654', 'lucas_matos@outlook.com.br
 
 --DROP TABLE [Pessoa];
 SELECT * FROM [Pessoa];
@@ -85,7 +84,7 @@ INSERT INTO [PessoaJuridica] (idPessoa, tipoDocumento, dataExpedicao, dataValida
 VALUES (1, 'CNPJ', '2013/05/23', ''),
        (2, 'CNPJ', '2013/05/23', '');
 
--- Atualização dos dados na PessoaJuridica com os CNPJ
+-- AtualizaÃ§Ã£o dos dados na PessoaJuridica com os CNPJ
 UPDATE [PessoaJuridica]
 SET CNPJ = '18263258000146'
 WHERE idPessoaJuridica = 1;
@@ -118,7 +117,7 @@ INSERT INTO [PessoaFisica] (idPessoa, tipoDocumento, dataExpedicao, dataValidade
 VALUES (1, 'CPF', '2003/05/23', ''),
        (2, 'CPF', '2013/05/23', '');
 
--- Atualização dos dados na tabela PessoaFisica com os CPF
+-- AtualizaÃ§Ã£o dos dados na tabela PessoaFisica com os CPF
 UPDATE [PessoaFisica]
 SET CPF = '022094775-40'
 WHERE idPessoaFisica = 1;
@@ -167,18 +166,18 @@ SELECT * FROM [Movimentacao];
 ------------------------------------------------------------------------------------------------------------------------
 
 
--- a) Dados completos de pessoas físicas.
+-- a) Dados completos de pessoas fÃ­sicas.
 SELECT * FROM PessoaFisica;
 
 ------------------------------------------------------------------------------------------------------------------------
 
 
--- b) Dados completos de pessoas jurídicas.
+-- b) Dados completos de pessoas jurÃ­dicas.
 SELECT * FROM PessoaJuridica;
 
 ------------------------------------------------------------------------------------------------------------------------
 
--- c) Movimentações de entrada, com produto, fornecedor, quantidade, preço unitário e valor total.
+-- c) MovimentaÃ§Ãµes de entrada, com produto, fornecedor, quantidade, preÃ§o unitÃ¡rio e valor total.
 SELECT p.nome, m.idProduto, m.idPessoa, m.quantidade, m.valor_unitario, (m.quantidade * m.valor_unitario) AS valor_total
 FROM Movimentacao AS m
 JOIN Pessoa AS p ON m.idPessoa = p.idPessoa
@@ -186,7 +185,7 @@ WHERE m.tipo = 'E';
 
 ------------------------------------------------------------------------------------------------------------------------
 
--- d) Movimentações de saída, com produto, cliente, quantidade, preço unitário e valor total.
+-- d) MovimentaÃ§Ãµes de saÃ­da, com produto, cliente, quantidade, preÃ§o unitÃ¡rio e valor total.
 SELECT p.nome, m.idProduto, m.idPessoa, m.quantidade, m.valor_unitario, (m.quantidade * m.valor_unitario) AS valor_total
 FROM Movimentacao AS m
 JOIN Pessoa AS p ON m.idPessoa = p.idPessoa
@@ -202,7 +201,7 @@ GROUP BY idProduto;
 
 ------------------------------------------------------------------------------------------------------------------------
 
--- f) Valor total das saídas agrupadas por produto.
+-- f) Valor total das saÃ­das agrupadas por produto.
 SELECT idProduto, SUM(quantidade * valor_unitario) AS ValorTotalSaida
 FROM Movimentacao
 WHERE tipo = 'S'
@@ -210,7 +209,7 @@ GROUP BY idProduto;
 
 ------------------------------------------------------------------------------------------------------------------------
 
--- g) Operadores que não efetuaram movimentações de entrada (compra).
+-- g) Operadores que nÃ£o efetuaram movimentaÃ§Ãµes de entrada (compra).
 SELECT *
 FROM Usuario
 WHERE idUsuario NOT IN (SELECT DISTINCT idUsuario FROM Movimentacao WHERE tipo = 'E');
@@ -227,7 +226,7 @@ GROUP BY m.idUsuario, u.login;
 ------------------------------------------------------------------------------------------------------------------------
 
 
--- i) Valor total de saída, agrupado por operador.
+-- i) Valor total de saÃ­da, agrupado por operador.
 SELECT p.nome AS operador, SUM(m.quantidade * m.valor_unitario) AS valor_total_saida
 FROM Movimentacao AS m
 JOIN Pessoa AS p ON m.idPessoa = p.idPessoa
@@ -236,7 +235,7 @@ GROUP BY p.nome;
 
 ------------------------------------------------------------------------------------------------------------------------
 
----J) Valor médio de venda por produto, utilizando média ponderada.
+---J) Valor mÃ©dio de venda por produto, utilizando mÃ©dia ponderada.
 SELECT idProduto, SUM(quantidade * valor_unitario) / SUM(quantidade) AS ValorMedioVenda
 FROM Movimentacao
 WHERE tipo = 'S'
