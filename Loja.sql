@@ -55,7 +55,7 @@ CREATE TABLE [Pessoa] (
 -- Inserindo dados na tabela Pessoa
 INSERT INTO [Pessoa] (nome, logradouro, cidade, estado, telefone, email)
 VALUES ('Lucas Matos de Souza', 'Rua Chile', 'Rio de Janeiro', 'RJ', '11991876543', 'lucas_matos@outlook.com.br'),
-       ('FNatan Matos de Souza', 'Rua Chile', 'Rio de Janeiro', 'RJ', '12345678909', 'lucas_matos@outlook.com.br'),
+       ('Natan Matos de Souza', 'Rua Chile', 'Rio de Janeiro', 'RJ', '12345678909', 'lucas_matos@outlook.com.br'),
        ('Diana Oliveira de Souza', 'Rua Ana Augusta', 'Rio de Janeiro', 'RJ', '11991098789', 'lucas_matos@outlook.com.br'),
        ('Padaria Norte', 'Rua México', 'Rio de Janeiro', 'RJ', '11909878654', 'lucas_matos@outlook.com.br
 
